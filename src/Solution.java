@@ -8,8 +8,8 @@ public class Solution {
         int port;
 
         if ( args.length != 2 ) {
-            host = "91.202.71.251";
-            port = 9999;
+            host = "192.168.1.194";
+            port = 46764;
             System.out.println("binding to port " + host + ":" + port);
 
         } else {
@@ -28,11 +28,14 @@ public class Solution {
                         new BufferedReader (
                                 new InputStreamReader ( System.in ) )
         ) {
+            Outputer outer = new Outputer(echoSocket);
+            Thread output = new Thread(outer);
+            output.start();
             System.out.println("Type in some text please.");
             String userInput;
-            while ((userInput = stdIn.readLine ()) != null) {
-                out.println (userInput);
-                System.out.println ("echo: " + in.readLine ());
+            while ((userInput = in.readLine ()) != null) {
+                System.out.println(userInput);
+
             }
         }
     }
